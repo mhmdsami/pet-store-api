@@ -1,5 +1,6 @@
 import express from "express";
 import { getDatabase } from "../utils/database";
+import { authToken } from "../utils/config";
 
 const router = express.Router();
 
@@ -7,7 +8,7 @@ router.get("/", async (req, res) => {
   try {
     const db = await getDatabase();
 
-    const data = await db.collection("pets").find().sort({ _id: -1 }).toArray();
+    const data = await db.collection("pets").find().sort({ _id: 1 }).toArray();
     if (data.length === 0) return res.status(204);
     res.send(data);
   } catch (error) {
@@ -32,6 +33,11 @@ router.get("/:_id", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
+  if (req.headers.authorization != authToken)
+    return res
+      .status(401)
+      .send({ message: "You are unauthorized make request" });
+
   const data = req.body;
   try {
     const db = await getDatabase();
@@ -44,6 +50,11 @@ router.post("/", async (req, res) => {
 });
 
 router.put("/:_id", async (req, res) => {
+  if (req.headers.authorization != authToken)
+    return res
+      .status(401)
+      .send({ message: "You are unauthorized make request" });
+
   let data = req.body;
   try {
     const db = await getDatabase();
@@ -63,6 +74,11 @@ router.put("/:_id", async (req, res) => {
 });
 
 router.delete("/:_id", async (req, res) => {
+  if (req.headers.authorization != authToken)
+    return res
+      .status(401)
+      .send({ message: "You are unauthorized make request" });
+
   try {
     const db = await getDatabase();
     const _id = parseInt(req.params._id);
