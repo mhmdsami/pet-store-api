@@ -21,7 +21,10 @@ router.get("/:_id", async (req, res) => {
     const _id = parseInt(req.params._id);
 
     const data = await db.collection("pets").findOne({ _id });
-    if (!data) return res.status(400).send({ _id, message: "Specified _id does not exist" });
+    if (!data)
+      return res
+        .status(400)
+        .send({ _id, message: "Specified _id does not exist" });
     res.send(data);
   } catch (error) {
     res.status(400).send(error);
@@ -49,10 +52,12 @@ router.put("/:_id", async (req, res) => {
     await db.collection("pets").updateOne({ _id }, { $set: { ...data } });
     data = await db.collection("pets").findOne({ _id });
 
-    if(!data) return res.status(400).send({ _id, message: "Specified _id does not exist" })
+    if (!data)
+      return res
+        .status(400)
+        .send({ _id, message: "Specified _id does not exist" });
     res.send({ message: "Updated data successfully", data });
-  }
-  catch (error) {
+  } catch (error) {
     res.status(400).send({ error: error, data });
   }
 });
@@ -63,10 +68,10 @@ router.delete("/:_id", async (req, res) => {
     const _id = parseInt(req.params._id);
 
     const { deletedCount } = await db.collection("pets").deleteOne({ _id });
-    if (deletedCount === 0) return res.status(400).send({ message: "Specified _id does not exist" });
+    if (deletedCount === 0)
+      return res.status(400).send({ message: "Specified _id does not exist" });
     res.send({ _id, message: "Data deleted successfully" });
-  }
-  catch (error) {
+  } catch (error) {
     res.status(400).send({ error: error });
   }
 });
