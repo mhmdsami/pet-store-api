@@ -5,7 +5,7 @@
 ### Available endpoints
 `GET` `/api/pets/` - To get the details of all the pets
 
-![get-all](https://lh3.googleusercontent.com/pw/AL9nZEXg0O_6_J8xwQ0DQp6htb5oZ7v_Xt2zc5x1iBjTLaRRlnegk1eEvSX2YjaUQOc7oJ_mRkIjGOSpEbvcPC075dKmFh-Qz8pzQbq6YNDzYMLIlRPKojyBHplQl5WqhIwe442bAj1k1fJFcEVjVwSI-hX4=w1760-h990-no)
+![get-all](https://lh3.googleusercontent.com/pw/AL9nZEWWqHqMGth3opsSZ9ulpvfhA54jzSDlHdmKSiL-SlxSF8C-u69l7stM8pT-a3BByIR-pShyMinVYAVQeJykAeHRFaW66VayDSbP-TC2ucQES30HSJXOuG9rrX0TwqjjFFB0Ow1OvkE2nqanseuQpNP3=w1760-h990-no)
 
 `GET` `/api/pets/:id` - To get the details of one pet
 
