@@ -1,6 +1,4 @@
 # pet-store-api
-> This repo is contains a backend task for GDSC SRM Recruitments    
-> Candidate ID: CAND8216
 ## Documentation
 ### Available endpoints
 `GET` `/api/pets/` - To get the details of all the pets
