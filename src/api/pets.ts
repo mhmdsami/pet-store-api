@@ -36,7 +36,7 @@ router.post("/", async (req, res) => {
   if (req.headers.authorization != authToken)
     return res
       .status(401)
-      .send({ message: "You are unauthorized make request" });
+      .send({ message: "You are unauthorized to make this request" });
 
   const data = req.body;
   try {
@@ -53,7 +53,7 @@ router.put("/:_id", async (req, res) => {
   if (req.headers.authorization != authToken)
     return res
       .status(401)
-      .send({ message: "You are unauthorized make request" });
+      .send({ message: "You are unauthorized to make this request" });
 
   let data = req.body;
   try {
@@ -77,7 +77,7 @@ router.delete("/:_id", async (req, res) => {
   if (req.headers.authorization != authToken)
     return res
       .status(401)
-      .send({ message: "You are unauthorized make request" });
+      .send({ message: "You are unauthorized to make this request" });
 
   try {
     const db = await getDatabase();
