@@ -1,7 +1,7 @@
 import express from "express";
 import { Request, Response } from "express";
-import { authToken } from "utils/config";
-import { getDatabase } from "utils/database";
+import { authToken } from "../../utils/config";
+import { getDatabase } from "../../utils/database";
 
 
 const router = express.Router();

@@ -1,6 +1,6 @@
 import express from "express";
 import morgan from "morgan";
-import petsRouter from "api/router/pets.routes";
+import petsRouter from "./api/router/pets.routes";
 import { port } from "./utils/config";
 
 const app = express();
