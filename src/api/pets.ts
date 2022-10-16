@@ -5,7 +5,6 @@ import { authToken } from "../utils/config";
 const router = express.Router();
 
 router.get("/", async (req, res) => {
-  console.log("1");
   try {
     const db = await getDatabase();
 
@@ -39,7 +38,6 @@ router.post("/", async (req, res) => {
       .status(401)
       .send({ message: "You are unauthorized to make this request" });
 
-      console.log("1");
   const {_id, pet_name, owner_name, type, gender}= req.body;
   if(!_id || !pet_name || !owner_name || !type || !gender) {
     const error: Error = {
