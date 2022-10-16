@@ -38,10 +38,25 @@ router.post("/", async (req, res) => {
       .status(401)
       .send({ message: "You are unauthorized to make this request" });
 
-  const data = req.body;
+  const {_id, pet_name, owner_name, type, gender}= req.body;
+  if(!_id || !pet_name || !owner_name || !type || !gender) {
+    const error: Error = {
+      name: "MANDATORY_FIELDS_MISSING",
+      message: "Mandatory field is missing.",
+    };
+    return res.status(400).json(error);
+  }
+  const data = {
+    _id : _id,
+    pet_name : pet_name,
+    owner_name : owner_name,
+    type : type,
+    gender : gender 
+
+  }
   try {
     const db = await getDatabase();
-
+    
     await db.collection("pets").insertOne({ ...data });
     res.send({ message: "Added to the database successfully", data });
   } catch (error) {
