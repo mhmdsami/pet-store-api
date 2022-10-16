@@ -1,10 +1,12 @@
 import express from "express";
-import { getDatabase } from "../utils/database";
-import { authToken } from "../utils/config";
+import { Request, Response } from "express";
+import { authToken } from "utils/config";
+import { getDatabase } from "utils/database";
+
 
 const router = express.Router();
 
-router.get("/", async (req, res) => {
+export const getAllPets = async (req: Request, res: Response) => {
   try {
     const db = await getDatabase();
 
@@ -14,9 +16,9 @@ router.get("/", async (req, res) => {
   } catch (error) {
     res.status(400).send(error);
   }
-});
+}
 
-router.get("/:_id", async (req, res) => {
+export const getPetById = async (req: Request, res: Response) => {
   try {
     const db = await getDatabase();
     const _id = parseInt(req.params._id);
@@ -30,9 +32,9 @@ router.get("/:_id", async (req, res) => {
   } catch (error) {
     res.status(400).send(error);
   }
-});
+}
 
-router.post("/", async (req, res) => {
+export const createNewPet = async (req: Request, res: Response) => {
   if (req.headers.authorization != authToken)
     return res
       .status(401)
@@ -56,15 +58,14 @@ router.post("/", async (req, res) => {
   }
   try {
     const db = await getDatabase();
-    
     await db.collection("pets").insertOne({ ...data });
     res.send({ message: "Added to the database successfully", data });
   } catch (error) {
     res.status(400).send({ error: error, data });
   }
-});
+}
 
-router.put("/:_id", async (req, res) => {
+export const updatePet = async (req: Request, res: Response) => {
   if (req.headers.authorization != authToken)
     return res
       .status(401)
@@ -86,9 +87,9 @@ router.put("/:_id", async (req, res) => {
   } catch (error) {
     res.status(400).send({ error: error, data });
   }
-});
+}
 
-router.delete("/:_id", async (req, res) => {
+export const deletePet = async (req: Request, res: Response) => {
   if (req.headers.authorization != authToken)
     return res
       .status(401)
@@ -105,6 +106,6 @@ router.delete("/:_id", async (req, res) => {
   } catch (error) {
     res.status(400).send({ error: error });
   }
-});
+}
 
 export default router;
