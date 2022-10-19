@@ -40,8 +40,8 @@ export const createNewPet = async (req: Request, res: Response) => {
       .status(401)
       .send({ message: "You are unauthorized to make this request" });
 
-  const {_id, pet_name, owner_name, type, gender}= req.body;
-  if(!_id || !pet_name || !owner_name || !type || !gender) {
+  const {_id, pet_name, owner_name, type, gender, category}= req.body;
+  if(!_id || !pet_name || !owner_name || !type || !gender || !category) {
     const error: Error = {
       name: "MANDATORY_FIELDS_MISSING",
       message: "Mandatory field is missing.",
@@ -53,7 +53,8 @@ export const createNewPet = async (req: Request, res: Response) => {
     pet_name : pet_name,
     owner_name : owner_name,
     type : type,
-    gender : gender 
+    gender : gender,
+    category : category
 
   }
   try {
