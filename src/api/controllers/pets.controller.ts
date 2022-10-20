@@ -3,7 +3,6 @@ import { Request, Response } from "express";
 import { authToken } from "../../utils/config";
 import { getDatabase } from "../../utils/database";
 
-
 const router = express.Router();
 
 export const getAllPets = async (req: Request, res: Response) => {
@@ -16,7 +15,7 @@ export const getAllPets = async (req: Request, res: Response) => {
   } catch (error) {
     res.status(400).send(error);
   }
-}
+};
 
 export const getPetById = async (req: Request, res: Response) => {
   try {
@@ -32,7 +31,7 @@ export const getPetById = async (req: Request, res: Response) => {
   } catch (error) {
     res.status(400).send(error);
   }
-}
+};
 
 export const createNewPet = async (req: Request, res: Response) => {
   if (req.headers.authorization != authToken)
@@ -40,23 +39,16 @@ export const createNewPet = async (req: Request, res: Response) => {
       .status(401)
       .send({ message: "You are unauthorized to make this request" });
 
-  const {_id, pet_name, owner_name, type, gender, category}= req.body;
-  if(!_id || !pet_name || !owner_name || !type || !gender || !category) {
+  const { _id, pet_name, owner_name, type, gender, category } = req.body;
+  if (!_id || !pet_name || !owner_name || !type || !gender || !category) {
     const error: Error = {
       name: "MANDATORY_FIELDS_MISSING",
       message: "Mandatory field is missing.",
     };
     return res.status(400).json(error);
   }
-  const data = {
-    _id : _id,
-    pet_name : pet_name,
-    owner_name : owner_name,
-    type : type,
-    gender : gender,
-    category : category
+  const data = { _id, pet_name, owner_name, type, gender, category };
 
-  }
   try {
     const db = await getDatabase();
     await db.collection("pets").insertOne({ ...data });
@@ -64,7 +56,7 @@ export const createNewPet = async (req: Request, res: Response) => {
   } catch (error) {
     res.status(400).send({ error: error, data });
   }
-}
+};
 
 export const updatePet = async (req: Request, res: Response) => {
   if (req.headers.authorization != authToken)
@@ -88,7 +80,7 @@ export const updatePet = async (req: Request, res: Response) => {
   } catch (error) {
     res.status(400).send({ error: error, data });
   }
-}
+};
 
 export const deletePet = async (req: Request, res: Response) => {
   if (req.headers.authorization != authToken)
@@ -107,6 +99,6 @@ export const deletePet = async (req: Request, res: Response) => {
   } catch (error) {
     res.status(400).send({ error: error });
   }
-}
+};
 
 export default router;
