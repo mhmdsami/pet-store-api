@@ -7,6 +7,6 @@ router.get("/", getAllPets)
 router.get("/:_id", getPetById)
 router.post("/", createNewPet)
 router.put("/:_id", updatePet)
-router.delete(":/_id", deletePet)
+router.delete("/:_id", deletePet)
 
 export default router;
